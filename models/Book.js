@@ -13,7 +13,7 @@ const BookSchema = new mongoose.Schema(
       trim: true,
     },
     publication_year: {
-      type: Int,
+      type: Number,
       required: [true, "Publication year is required"],
       trim: true,
     },
@@ -23,7 +23,7 @@ const BookSchema = new mongoose.Schema(
       trim: true,
     },
     no_of_sections: {
-      type: String,
+      type: Number,
       required: [true, "Number of sections is required"],
       trim: true,
     },
@@ -33,10 +33,6 @@ const BookSchema = new mongoose.Schema(
   }
 );
 
-// Automatically generate `id` (alternative to `_id`)
-BookSchema.virtual("id").get(function () {
-  return this._id.toHexString();
-});
 BookSchema.set("toJSON", { virtuals: true });
 
 module.exports = mongoose.model("Book", BookSchema);

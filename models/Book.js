@@ -24,7 +24,7 @@ const BookSchema = new mongoose.Schema(
     },
     no_of_sections: {
       type: String,
-      required: [true, "Name is required"],
+      required: [true, "Number of sections is required"],
       trim: true,
     },
   },

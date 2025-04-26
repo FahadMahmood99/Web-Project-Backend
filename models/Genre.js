@@ -24,4 +24,4 @@ GenreSchema.virtual("id").get(function () {
 });
 GenreSchema.set("toJSON", { virtuals: true });
 
-mongoose.model = mongoose.model("Genre", GenreSchema);
+module.exports = mongoose.model("Genre", GenreSchema);

@@ -1,17 +1,23 @@
 const Book = require("../models/Book");
 
-exports.getAllBooks = async (req, res) => {
+// In bookController.js
+exports.getBooksByGenre = async (req, res) => {
   try {
-    const books = await Book.find();
+    const genre = req.query.genre;
+
+    // If genre is provided, filter books by genre
+    const filter = genre ? { genre } : {}; // If genre is passed, filter; otherwise fetch all books
+
+    const books = await Book.find(filter); // genre will come from URL like http://localhost:5000/api/books?genre=Fiction
     res.status(200).json(books);
-  } catch {
+  } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
 exports.insertBook = async (req, res) => {
   try {
-    const { title, author, publication_year, cover_image_url, no_of_sections } =
+    const { title, author, publication_year, cover_image_url, no_of_sections, genre } =
       req.body;
 
     // Check if user exists
@@ -27,6 +33,7 @@ exports.insertBook = async (req, res) => {
       publication_year,
       cover_image_url,
       no_of_sections,
+      genre
     });
 
     res.status(201).json(book);

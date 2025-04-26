@@ -27,6 +27,11 @@ const BookSchema = new mongoose.Schema(
       required: [true, "Number of sections is required"],
       trim: true,
     },
+    genre: {
+      type: String,
+      required: [true, "Genres is required"],
+      trim: true,
+    },
   },
   {
     timestamps: true,

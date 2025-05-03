@@ -10,7 +10,7 @@ connectDB();
 const app = express();
 
 // Middleware (Add cookieParser)
-app.use(cors({ origin: 'http://localhost:3000', credentials: true })); // Update CORS for JWT cookies
+app.use(cors({ origin: 'http://localhost:5173', credentials: true })); // Update CORS for JWT cookies
 app.use(express.json());
 app.use(cookieParser()); // Add this line
 

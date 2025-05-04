@@ -5,12 +5,18 @@ const {
   deleteBook,
   getBooksByGenre,
   searchBooks,
+  getBookById,
+  getFavorites,
+  toggleFavorite,
 } = require("../controllers/bookController");
 const { model } = require("mongoose");
 
-router.get("/search", searchBooks);
 router.get("/", getBooksByGenre);
+router.get("/:id", getBookById);
 router.post("/", insertBook);
 router.delete("/:title", deleteBook);
+router.get("/search", searchBooks);
+router.get("/favorites", getFavorites);
+router.patch("/:id/favorite", toggleFavorite);
 
 module.exports = router;

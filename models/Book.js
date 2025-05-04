@@ -32,6 +32,10 @@ const BookSchema = new mongoose.Schema(
       required: [true, "Genres is required"],
       trim: true,
     },
+    favorites: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,

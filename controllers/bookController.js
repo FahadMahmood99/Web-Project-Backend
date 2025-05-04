@@ -15,6 +15,22 @@ exports.getBooksByGenre = async (req, res) => {
   }
 };
 
+// Get book by ID
+exports.getBookById = async (req, res) => {
+  try {
+    const bookId = req.params.id;
+    const book = await Book.findById(bookId);
+
+    if (!book) {
+      return res.status(404).json({ error: "Book not found" });
+    }
+
+    res.status(200).json(book);
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
 exports.insertBook = async (req, res) => {
   try {
     const { title, author, publication_year, cover_image_url, no_of_sections, genre } =
@@ -68,6 +84,32 @@ exports.searchBooks = async (req, res) => {
     }).limit(10); // Optional: limit number of results
 
     res.status(200).json(books);
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+exports.toggleFavorite = async (req, res) => {
+  try {
+    const book = await Book.findById(req.params.id);
+
+    if (!book) {
+      return res.status(404).json({ error: "Book not found" });
+    }
+
+    book.favorites = book.favorites === 1 ? 0 : 1;
+    await book.save();
+
+    res.status(200).json({ message: "Favorite status updated", book });
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+exports.getFavorites = async (req, res) => {
+  try {
+    const favorites = await Book.find({ favorites: 1 });
+    res.status(200).json(favorites);
   } catch (err) {
     res.status(500).json({ error: "Server error" });
   }

@@ -32,7 +32,27 @@ const BookSchema = new mongoose.Schema(
       required: [true, "Genres is required"],
       trim: true,
     },
-    summary: {
+    summary_section_1: {
+      type: String,
+      required: [true, "Summary is required"],
+      trim: true,
+    },
+    summary_section_2: {
+      type: String,
+      required: [true, "Summary is required"],
+      trim: true,
+    },
+    summary_section_3: {
+      type: String,
+      required: [true, "Summary is required"],
+      trim: true,
+    },
+    summary_section_4: {
+      type: String,
+      required: [true, "Summary is required"],
+      trim: true,
+    },
+    summary_section_5: {
       type: String,
       required: [true, "Summary is required"],
       trim: true,

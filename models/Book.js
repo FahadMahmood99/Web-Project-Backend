@@ -57,9 +57,9 @@ const BookSchema = new mongoose.Schema(
       required: [true, "Summary is required"],
       trim: true,
     },
-    favorites: {
-      type: Number,
-      default: 0,
+    favorite: {
+      type: Boolean,
+      default: false,
     }
   },
   {

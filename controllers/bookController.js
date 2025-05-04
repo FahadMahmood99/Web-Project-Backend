@@ -54,3 +54,21 @@ exports.deleteBook = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
+
+exports.searchBooks = async (req, res) => {
+  try {
+    const query = req.query.q;
+    if (!query) {
+      return res.status(400).json({ error: "Missing search query" });
+    }
+
+    const regex = new RegExp(query, "i"); // case-insensitive regex
+    const books = await Book.find({
+      $or: [{ title: regex }, { author: regex }],
+    }).limit(10); // Optional: limit number of results
+
+    res.status(200).json(books);
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
+  }
+};
